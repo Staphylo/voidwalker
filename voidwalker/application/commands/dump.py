@@ -58,8 +58,8 @@ data widget which displays it in hexadecimal and ascii form (when possible).'''
                             '%(face-normal)s invalid arguments!\n'))
             return
 
-        address = abs(long(arguments[0]))
-        size = abs(long(arguments[1]))
+        address = abs(int(arguments[0]))
+        size = abs(int(arguments[1]))
 
         inferior = thread.get_inferior()
         data_dump = inferior.read_memory(address, size)
@@ -91,8 +91,8 @@ output.'''
                             '%(face-normal)s invalid arguments!\n'))
             return
 
-        address = abs(long(arguments[0]))
-        size = abs(long(arguments[1]))
+        address = abs(int(arguments[0]))
+        size = abs(int(arguments[1]))
 
         inferior = thread.get_inferior()
         listing = inferior.disassemble(address, size)

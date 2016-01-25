@@ -38,11 +38,11 @@ class ContextWidget(Widget):
         registers_section = Section('registers')
         for _, register_dict in context.registers():
             reg_size = 0
-            for name in register_dict.iterkeys():
+            for name in register_dict.keys():
                 reg_size = max(reg_size, len(name))
 
             table = Table()
-            for name, register in register_dict.iteritems():
+            for name, register in register_dict.items():
                 contents = [('%(face-identifier)s' +
                              (('%%-%ds: ' % reg_size) % name))]
 

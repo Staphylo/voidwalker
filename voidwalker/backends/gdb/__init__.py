@@ -25,4 +25,4 @@ from .hooks import HookParameter
 from .hooks import ContextHookParameter
 from .hooks import VoidwalkerHookStop
 
-import tools
+from . import tools

@@ -19,9 +19,7 @@ import abc
 from collections import deque
 
 
-class Thread(object):
-    __metaclass__ = abc.ABCMeta
-
+class Thread(object, metaclass=abc.ABCMeta):
     def __init__(self, inferior):
         self._inferior = inferior
         self._contexts = deque()
@@ -45,9 +43,7 @@ class Thread(object):
         raise NotImplementedError
 
 
-class ThreadFactory(object):
-    __metaclass__ = abc.ABCMeta
-
+class ThreadFactory(object, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def create_thread(self, inferior, thread_id):
         raise NotImplementedError

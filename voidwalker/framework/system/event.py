@@ -33,7 +33,7 @@ class EventQueue(object):
     def __init__(self):
         self._queue = deque()
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self._queue)
 
     def onEnqueue(self):

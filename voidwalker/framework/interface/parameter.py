@@ -17,9 +17,7 @@
 import abc
 
 
-class Parameter(object):
-    __metaclass__ = abc.ABCMeta
-
+class Parameter(object, metaclass=abc.ABCMeta):
     def init(self):
         pass
 
@@ -32,9 +30,7 @@ class Parameter(object):
         raise NotImplementedError
 
 
-class PrefixParameter(Parameter):
-    __metaclass__ = abc.ABCMeta
-
+class PrefixParameter(Parameter, metaclass=abc.ABCMeta):
     @classmethod
     def get_value(cls):
         raise TypeError
@@ -44,33 +40,25 @@ class PrefixParameter(Parameter):
         raise NotImplementedError
 
 
-class BooleanParameter(Parameter):
-    __metaclass__ = abc.ABCMeta
-
+class BooleanParameter(Parameter, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def default_value(self):
         raise NotImplementedError
 
 
-class EnumParameter(Parameter):
-    __metaclass__ = abc.ABCMeta
-
+class EnumParameter(Parameter, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def sequence(self):
         raise NotImplementedError
 
 
-class IntegerParameter(Parameter):
-    __metaclass__ = abc.ABCMeta
-
+class IntegerParameter(Parameter, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def default_value(self):
         raise NotImplementedError
 
 
-class ParameterFactory(object):
-    __metaclass__ = abc.ABCMeta
-
+class ParameterFactory(object, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def create(self, parameter_type):
         raise NotImplementedError

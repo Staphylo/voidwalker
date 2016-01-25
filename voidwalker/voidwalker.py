@@ -22,7 +22,7 @@ if 'voidwalker' not in sys.modules:
     pkg_path = os.path.abspath(os.path.join(os.path.dirname(self_path),
                                             os.pardir))
     sys.path.insert(0, pkg_path)
-    from voidwalker import voidwalker
+    from .voidwalker import voidwalker
 
 else:
     from flowui.terminal import AnsiTerminal
@@ -48,7 +48,7 @@ else:
     from .backends.gdb import tools
     from . import application
 
-    from version import __version__
+    from .version import __version__
 
     class VoidwalkerBuilder(object):
         def __init__(self, version):

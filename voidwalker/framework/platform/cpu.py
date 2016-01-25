@@ -67,12 +67,10 @@ def create_static_register(register):
     return StaticRegister(register.name())
 
 
-class Cpu(object):
-    __metaclass__ = abc.ABCMeta
-
+class Cpu(object, metaclass=abc.ABCMeta):
     def __init__(self, cpu_factory, registers):
         self._registers = OrderedDict()
-        for group, register_list in registers.iteritems():
+        for group, register_list in registers.items():
             registers = OrderedDict([(x.name(),
                                       cpu_factory.create_register(self, x))
                                      for x in register_list])
@@ -85,14 +83,14 @@ class Cpu(object):
         raise NotImplementedError
 
     def register(self, name):
-        for register_dict in self._registers.itervalues():
+        for register_dict in self._registers.values():
             if name in register_dict:
                 return register_dict[name]
 
         return None
 
     def registers(self):
-        return self._registers.iteritems()
+        return iter(self._registers.items())
 
     @abc.abstractmethod
     def stack_pointer(self):
@@ -103,9 +101,7 @@ class Cpu(object):
         raise NotImplementedError
 
 
-class CpuFactory(object):
-    __metaclass__ = abc.ABCMeta
-
+class CpuFactory(object, metaclass=abc.ABCMeta):
     def create_cpu(self, architecture):
         assert architecture in _cpu_map
         return _cpu_map.get(architecture,

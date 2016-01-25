@@ -32,14 +32,14 @@ class NopSnippet(Snippet):
         pass
 
     def architectures(self):
-        return NopSnippet._code.iterkeys()
+        return list(NopSnippet._code.keys())
 
     def len(self, architecture):
         code = self.implementation(architecture)
         return len(code)
 
     def implementation(self, architecture):
-        assert architecture in NopSnippet._code.iterkeys()
+        assert architecture in list(NopSnippet._code.keys())
         return NopSnippet._code[architecture]
 
     @staticmethod

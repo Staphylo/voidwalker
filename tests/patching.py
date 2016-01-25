@@ -25,7 +25,7 @@ class SnippetsTest(TestCase):
     def test_snippet_manager(self):
         snippet_repository = SnippetRepository()
         for name, snippet in snippet_repository.snippets():
-            print 'Snippet: %s %s' % (name, snippet.description())
+            print('Snippet: %s %s' % (name, snippet.description()))
             for architecture in snippet.architectures():
                 implementation = snippet.implementation(architecture)
-                print '\t%s' % implementation.hex()
+                print('\t%s' % implementation.hex())

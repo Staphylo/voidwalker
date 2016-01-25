@@ -30,14 +30,14 @@ class Context(object):
         return self._stack
 
     def register(self, name):
-        for register_dict in self._registers.itervalues():
+        for register_dict in self._registers.values():
             if name in register_dict:
                 return register_dict[name]
 
         return None
 
     def registers(self):
-        return self._registers.iteritems()
+        return iter(self._registers.items())
 
     def instruction_listing(self):
         return self._instruction_listing

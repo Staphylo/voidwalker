@@ -40,9 +40,13 @@ class DataChunk(object):
 
 
 class DataWidget(Widget):
-    _ascii_filter = ''.join([['.', chr(x)]
+    # _ascii_filter = ''.join([['.', chr(x)]
+    #                          [chr(x) in string.printable[:-5]]
+    #                          for x in range(256)])
+    _ascii_filter = b''.join([[b'.', chr(x).encode()]
                              [chr(x) in string.printable[:-5]]
-                             for x in xrange(256)])
+                             for x in range(256)])
+
 
     def __init__(self, data_chunk):
         super(DataWidget, self).__init__()
@@ -61,10 +65,10 @@ class DataWidget(Widget):
             ascii_string = []
             for octuple in grouper(8, line):
                 for quadruple in grouper(4, octuple):
-                    hex_string += [(' %02X' % ord(i))
+                    hex_string += [(' %02X' % i[0])
                                    for i in quadruple
                                    if i is not None]
-                    filtered = ''.join([x.translate(self._ascii_filter)
+                    filtered = ''.join([str(x.translate(self._ascii_filter), 'ascii')
                                         for x in quadruple
                                         if x is not None])
                     ascii_string += filtered.replace('%', '%%')

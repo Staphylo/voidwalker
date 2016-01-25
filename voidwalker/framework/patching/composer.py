@@ -27,11 +27,10 @@ class CodeBlock(object):
 
     def hex(self):
         stream = ByteStream()
-        (x.assemble(stream) for x in self._instructions).next()
-        return ' '.join('%02x' % ord(x)
-                        for x in stream.buffer())
+        next((x.assemble(stream) for x in self._instructions))
+        return ' '.join('%02x' % x for x in stream.buffer())
 
     def assemble(self):
         stream = ByteStream()
-        (x.assemble(stream) for x in self._instructions).next()
+        next((x.assemble(stream) for x in self._instructions))
         return stream.buffer()

@@ -28,7 +28,7 @@ class ConfigurationNode(object):
         if self._parameter is not None:
             s += [self._parameter.name(), ': ']
         s.append('{')
-        for child in self._children.values():
+        for child in list(self._children.values()):
             s += [repr(child), ', ']
         s.append('}')
         return ''.join(s)

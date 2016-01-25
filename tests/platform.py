@@ -39,7 +39,7 @@ class CpuTest(TestCase):
     def test_test(self):
         cpu_repository = CpuRepository(TestCpuFactory())
         cpu = cpu_repository.get_cpu(TestCpu.architecture())
-        for register_list in TestCpu.register_dict.itervalues():
+        for register_list in TestCpu.register_dict.values():
             for name in register_list:
                 self.assertIsNotNone(cpu.register(name))
                 register = cpu.register(name)
@@ -76,7 +76,7 @@ class ContextTest(TestCase):
         context = self._platform_factory.create_context(Configuration(),
                                                         inferior, thread)
         for _, register_dict in inferior.cpu().registers():
-            for name, register in register_dict.iteritems():
+            for name, register in register_dict.items():
                 self.assertIsNotNone(context.register(name))
                 context_register = context.register(name)
                 self.assertEqual(register.size(), context_register.size())

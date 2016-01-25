@@ -17,9 +17,7 @@
 import abc
 
 
-class PlatformFactory(object):
-    __metaclass__ = abc.ABCMeta
-
+class PlatformFactory(object, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def create_context(self, config, thread):
         raise NotImplementedError

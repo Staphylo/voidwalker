@@ -17,9 +17,7 @@
 import abc
 
 
-class Inferior(object):
-    __metaclass__ = abc.ABCMeta
-
+class Inferior(object, metaclass=abc.ABCMeta):
     def __init__(self, cpu):
         self._cpu = cpu
         self._threads = {}
@@ -54,9 +52,7 @@ class Inferior(object):
         raise NotImplementedError
 
 
-class InferiorFactory(object):
-    __metaclass__ = abc.ABCMeta
-
+class InferiorFactory(object, metaclass=abc.ABCMeta):
     def __init__(self, cpu_factory):
         self._cpu_factory = cpu_factory
 

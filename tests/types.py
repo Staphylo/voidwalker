@@ -41,20 +41,20 @@ class WidgetsTest(TestCase):
 
     def test_datachunk(self):
         address = 0xf00fba11
-        data = array('c', ['\x00', '\x01', '\xff', '\x12'])
-        data_chunk = DataChunk(address, buffer(data))
+        data = b"\x00\x01\xff\x12"
+        data_chunk = DataChunk(address, memoryview(data))
         self.assertEqual(address, data_chunk.address())
-        self.assertItemsEqual(data, data_chunk.buffer())
+        self.assertCountEqual(data, data_chunk.buffer())
 
     def test_datawidget(self):
         address = 0xf00fba11
-        data = '\x00test\x12\x67\x90\xff\x0042\xff\x15\x16'
-        data_chunk = DataChunk(address, buffer(data))
+        data = b'\x00test\x12\x67\x90\xff\x0042\xff\x15\x16'
+        data_chunk = DataChunk(address, memoryview(data))
         data_widget = DataWidget(data_chunk)
         self._draw_widget(data_widget)
 
     def test_instruction(self):
-        opcode = array('c', ['\x83', '\xc0', '\x02'])
+        opcode = '\x83\xc0\x02'
         mnemonic = 'add'
         operands = '$0x2,%%eax'
         symbol = '<main+20>'
@@ -66,13 +66,11 @@ class WidgetsTest(TestCase):
 
     def test_instruction_listing(self):
         listing = InstructionListing()
-        listing.add_instruction(0xed4, Instruction(array('c', ['\x83', '\xc0',
-                                                               '\x02']),
+        listing.add_instruction(0xed4, Instruction('\x83\xc0\x02',
                                                    'add', '$0x2,%%eax',
                                                    '<main+20>'))
         long_symbol_name = ['x' for _ in range(self._terminal.DEFAULT_WIDTH)]
-        listing.add_instruction(0xed7, Instruction(array('c', ['\x48', '\x89',
-                                                               '\xc7']),
+        listing.add_instruction(0xed7, Instruction('\x48\x89\xc7',
                                                    'mov', '%%rax,%%rdi',
                                                    ''.join(long_symbol_name)))
 

@@ -52,7 +52,7 @@ class InstructionListing(object):
         return len(self._instructions)
 
     def instructions(self):
-        return self._instructions.iteritems()
+        return iter(self._instructions.items())
 
     def add_instruction(self, address, instruction):
         self._instructions[address] = instruction

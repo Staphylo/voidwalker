@@ -27,41 +27,31 @@ class PrefixCommand(Command):
                        'incomplete command!\n')
 
 
-class DataCommand(Command):
-    __metaclass__ = abc.ABCMeta
-
+class DataCommand(Command, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def execute(self, terminal, thread, argument):
         raise NotImplementedError
 
 
-class StackCommand(Command):
-    __metaclass__ = abc.ABCMeta
-
+class StackCommand(Command, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def execute(self, config, terminal, thread, platform_factory, argument):
         raise NotImplementedError
 
 
-class BreakpointCommand(Command):
-    __metaclass__ = abc.ABCMeta
-
+class BreakpointCommand(Command, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def execute(self, terminal, inferior, argument):
         raise NotImplementedError
 
 
-class SupportCommand(Command):
-    __metaclass__ = abc.ABCMeta
-
+class SupportCommand(Command, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def execute(self, terminal, argument):
         raise NotImplementedError
 
 
-class CommandFactory(object):
-    __metaclass__ = abc.ABCMeta
-
+class CommandFactory(object, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def create(self, command_type, inferior_repository, platform_factory,
                inferior_factory, thread_factory, config, terminal):

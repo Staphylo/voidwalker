@@ -121,12 +121,12 @@ class StatusRegister(Register):
     def str(self):
         value = self.value()
         status_list = []
-        for flag, mask in self._flags.iteritems():
+        for flag, mask in self._flags.items():
             if value & mask:
                 status_list.append('%s' % flag)
 
         ds_list = []
-        for flag, mask in self._ds_flags.iteritems():
+        for flag, mask in self._ds_flags.items():
             if value & mask:
                 ds_list.append('%s' % flag)
         if len(ds_list):
@@ -152,7 +152,7 @@ class MipsCpu(Cpu):
 
     def __init__(self, cpu_factory):
         registers = OrderedDict()
-        for group, register_list in self._registers.iteritems():
+        for group, register_list in self._registers.items():
             registers[group] = [Register(x) for x in register_list]
         registers['sp'].append(CauseRegister('cause'))
         registers['sp'].append(StatusRegister('sr'))

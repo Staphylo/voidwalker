@@ -19,5 +19,5 @@ from .mips import MipsCpu
 from .x86 import X86Cpu
 from .x86_64 import X8664Cpu
 
-import mips_instructions
-import x86_instructions
+from . import mips_instructions
+from . import x86_instructions

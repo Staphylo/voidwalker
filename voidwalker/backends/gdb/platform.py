@@ -49,7 +49,7 @@ class GdbCpuFactory(CpuFactory, object):
                                          to_string=True)
                     match = self._value_exp.search(result)
 
-                    return abs(long(match.group('value'), 16))
+                    return abs(int(match.group('value'), 16))
                 except ValueError:
                     return None
                 except gdb.error:
@@ -69,7 +69,7 @@ class GdbPlatformFactory(PlatformFactory, object):
             def _update_registers(self):
                 for group, register_dict in inferior.cpu().registers():
                     tuples = [(x.name(), create_static_register(x))
-                              for x in register_dict.itervalues()]
+                              for x in register_dict.values()]
                     register_dict = OrderedDict(tuples)
                     self._registers[group] = register_dict
 

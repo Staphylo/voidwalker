@@ -21,7 +21,7 @@ class SnippetRepository(object):
         return _snippet_map[name]
 
     def snippets(self):
-        return _snippet_map.items()
+        return list(_snippet_map.items())
 
 
 def register_snippet(cls):

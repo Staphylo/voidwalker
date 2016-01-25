@@ -59,7 +59,7 @@ there are no symbols and no known address to set a breakpoint at.'''
         address = None
         for match in self._text_exp.finditer(sections):
             if match.group('section') == '.text':
-                address = abs(long(match.group('start'), 16))
+                address = abs(int(match.group('start'), 16))
                 break
 
         if address is not None:

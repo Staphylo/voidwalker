@@ -118,7 +118,7 @@ touched by this command.'''
                 else:
                     implementation = snippet.implementation(architecture)
 
-                address = abs(long(argument[1]))
+                address = abs(int(argument[1]))
                 code = implementation.assemble()
                 inferior.write_memory(code, address)
 

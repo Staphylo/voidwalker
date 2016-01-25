@@ -74,9 +74,9 @@ class GdbInferior(Inferior):
 
         listing = InstructionListing()
         for i in range(len(parsed) - 1):
-            size = (long(parsed[i + 1]['address'], 16) -
-                    long(parsed[i]['address'], 16))
-            address = long(parsed[i]['address'], 16)
+            size = (int(parsed[i + 1]['address'], 16) -
+                    int(parsed[i]['address'], 16))
+            address = int(parsed[i]['address'], 16)
             data = self.read_memory(address, size)
 
             symbol = parsed[i]['symbol']
@@ -130,8 +130,8 @@ class GdbInferiorFactory(InferiorFactory, object):
     def create_inferior(self, inferior_id):
         gdb_inferior = None
         try:
-            gdb_inferior = (i for i in gdb.inferiors()
-                            if i.num == inferior_id).next()
+            gdb_inferior = next((i for i in gdb.inferiors()
+                            if i.num == inferior_id))
         except StopIteration:
             return None
 
@@ -140,14 +140,14 @@ class GdbInferiorFactory(InferiorFactory, object):
         info_target = gdb.execute('info target', False, True)
         try:
             matches = self._inferior_expression.findall(info_inferiors)
-            inferior = (i for i in matches if int(i[0]) == inferior_id).next()
+            inferior = next((i for i in matches if int(i[0]) == inferior_id))
 
             inferior_path = os.path.abspath(inferior[2]).strip()
             matches = self._file_expression.findall(info_target)
             try:
-                target = (i[1] for i in matches
+                target = next((i[1] for i in matches
                           if os.path.abspath(i[0]).strip() ==
-                          inferior_path).next()
+                          inferior_path))
 
                 architecture = self._target_to_architecture(target)
                 cpu = self._cpu_factory.create_cpu(architecture)
@@ -166,8 +166,8 @@ class GdbThreadFactory(ThreadFactory, object):
     def create_thread(self, inferior, thread_id):
         gdb_thread = None
         try:
-            gdb_thread = (i for i in inferior.gdb_inferior().threads()
-                          if i.num == thread_id).next()
+            gdb_thread = next((i for i in inferior.gdb_inferior().threads()
+                          if i.num == thread_id))
             thread = GdbThread(inferior, gdb_thread)
             inferior.add_thread(thread)
             return thread

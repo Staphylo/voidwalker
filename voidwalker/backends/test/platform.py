@@ -32,7 +32,7 @@ class TestCpu(Cpu):
 
     def __init__(self, cpu_factory):
         registers = OrderedDict()
-        for group, register_list in self.register_dict.items():
+        for group, register_list in list(self.register_dict.items()):
             registers[group] = [Register(x) for x in register_list]
         super(TestCpu, self).__init__(cpu_factory, registers)
 
@@ -86,7 +86,7 @@ class TestPlatformFactory(PlatformFactory, object):
 
                 for group, register_dict in inferior.cpu().registers():
                     register_dict = dict((x.name(), create_static_register(x))
-                                         for x in register_dict.itervalues())
+                                         for x in register_dict.values())
                     self._registers[group] = register_dict
 
         return TestContext()

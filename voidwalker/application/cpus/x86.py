@@ -43,7 +43,7 @@ class EflagsRegister(Register):
     def str(self):
         value = self.value()
         flag_list = []
-        for flag, mask in self._flags.iteritems():
+        for flag, mask in self._flags.items():
             if value & mask:
                 flag_list.append('%s ' % flag.upper())
 
@@ -60,7 +60,7 @@ class X86Cpu(Cpu):
 
     def __init__(self, cpu_factory):
         registers = OrderedDict()
-        for group, register_list in self._registers.iteritems():
+        for group, register_list in self._registers.items():
             registers[group] = [Register(x) for x in register_list]
         registers['sp'].append(EflagsRegister('eflags'))
         super(X86Cpu, self).__init__(cpu_factory, registers)

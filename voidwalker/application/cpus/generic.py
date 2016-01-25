@@ -23,7 +23,7 @@ from ...framework.platform import register_cpu
 @register_cpu
 class GenericCpu(Cpu):
     def __init__(self, cpu_factory, registers):
-        for group, register_list in registers.iteritems():
+        for group, register_list in registers.items():
             registers[group] = [Register(x) for x in register_list]
         super(GenericCpu, self).__init__(cpu_factory, registers)
 
